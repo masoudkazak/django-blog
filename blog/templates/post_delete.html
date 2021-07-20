@@ -1,0 +1,11 @@
+{% if request.user.is_authenticated %}
+    {% if request.user.id == post.author.id %}
+        <form method="post">
+            {% csrf_token %}
+            <strong>are you sure about delete?!</strong>
+            <input type="submit" value="delete">
+        </form>
+    {% else %}
+        <strong>You are not allowed!!!</strong>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,15 @@
+{{ post.title }}
+{% if request.user.is_authenticated %}
+    {% if request.user.id == post.author.id %}
+        <a href="{% url 'blog:update-view' post.author post.title post.id %}">
+            Edit
+        </a>
+        <a href="{% url 'blog:delete-view' post.author post.title post.id %}">
+            Delete
+        </a>
+    {% endif %}
+    <form action="{% url 'blog:like_post' post.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" name="post_id" value="{{ post.id }}">Like</button> - {{ total_likes }} Likes
+    </form>
+{% endif %}
