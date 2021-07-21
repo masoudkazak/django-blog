@@ -1,4 +1,6 @@
-{{ post.title }}
+{{ post.title }}<br>
+{{ post.category.name }}<br>
+{{ post.create_post }}
 {% if request.user.is_authenticated %}
     {% if request.user.id == post.author.id %}
         <a href="{% url 'blog:update-view' post.author post.title post.id %}">
@@ -11,5 +13,16 @@
     <form action="{% url 'blog:like_post' post.id %}" method="POST">
         {% csrf_token %}
         <button type="submit" name="post_id" value="{{ post.id }}">Like</button> - {{ total_likes }} Likes
-    </form>
+    </form><hr>
+    {% if not post.comments.all %}
+        No comments yet!!!
+        <a href="{% url 'blog:addcomment' post.id %}">Add Comment</a>
+    {% else %}
+        {% for comment in post.comments.all %}
+            {{ comment.user_cooment }}<br>
+            <h6>{{ comment.date_add }}</h6><br>
+            {{ comment.mycomment }}<br><br>
+        {% endfor %}
+        <a href="{% url 'blog:addcomment' post.id %}">Add Comment</a>
+    {% endif %}<hr>
 {% endif %}

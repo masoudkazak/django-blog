@@ -1,6 +1,5 @@
 from django import forms
-from django.forms import widgets
-from .models import Post
+from .models import Post, Comment
 
 
 class PostCreateForm(forms.ModelForm):
@@ -9,4 +8,13 @@ class PostCreateForm(forms.ModelForm):
         fields = ['author' ,'title' ,'body', 'status', 'category']
         widgets ={
             'author': forms.HiddenInput()
+        }
+
+
+class CommentCreateForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['user_cooment', 'post', 'mycomment']
+        widgets ={
+            'user_cooment': forms.HiddenInput()
         }

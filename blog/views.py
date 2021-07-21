@@ -1,9 +1,9 @@
-from .forms import PostCreateForm
-from .models import Post
+from .models import Post, Comment
 from django.views import generic
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
+from .forms import PostCreateForm, CommentCreateForm
 
 
 def LikeView(request, pk):
@@ -62,3 +62,13 @@ class PostCreateView(generic.CreateView):
         return {'author': self.request.user}
 
 
+class CommentCreateView(generic.CreateView):
+    model = Comment
+    form_class = CommentCreateForm
+    template_name = 'add_comment.html'
+    
+    def get_success_url(self):
+        return reverse('blog:homepage')
+    
+    def get_initial(self):
+        return {'user_cooment': self.request.user}

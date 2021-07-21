@@ -22,7 +22,7 @@ class Post(models.Model):
     create_post = models.DateTimeField(default=datetime.now())
     body = models.TextField()
     likes = models.ManyToManyField(User, related_name="post_likes", null=True, blank=True)
-    status = models.CharField(choices=STATUS, max_length=10, default='Published')
+    status = models.CharField(choices=STATUS, max_length=10, default='Draft')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     
     def total_likes(self):
@@ -33,8 +33,14 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user_cooment = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     mycomment = models.TextField()
+    date_add = models.DateTimeField(default=datetime.now())
+    
+    def __str__(self):
+        return '{} - {}'.format(self.post.title, self.user_cooment.username)
+    
 
 
 
