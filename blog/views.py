@@ -9,7 +9,7 @@ from .forms import PostCreateForm, CommentCreateForm
 def LikeView(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.likes.add(request.user)
-    return HttpResponseRedirect(reverse('blog:homepage'))
+    return HttpResponseRedirect(reverse('blog:detail-post', args=[post.author, post.title, post.id]))
 
 
 class PostListView(generic.ListView):

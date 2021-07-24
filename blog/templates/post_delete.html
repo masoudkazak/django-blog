@@ -4,6 +4,7 @@
             {% csrf_token %}
             <strong>are you sure about delete?!</strong>
             <input type="submit" value="delete">
+            <button><a href="{% url 'blog:homepage' %}">Cancel</a></button>
         </form>
     {% else %}
         <strong>You are not allowed!!!</strong>

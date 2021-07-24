@@ -4,6 +4,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="update">
+            <button><a href="{% url 'blog:homepage' %}">Cancel</a></button>
         </form>
     {% else %}
         <strong>You are not allowed!!!</strong>

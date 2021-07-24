@@ -1,6 +1,9 @@
 {{ post.title }}<br>
 {{ post.category.name }}<br>
-{{ post.create_post }}
+{{ post.create_post }}<br>
+{% if post.image %}
+    <img src="{{ post.image.url }}" height='650', width='auto'><br>
+{% endif %}
 {% if request.user.is_authenticated %}
     {% if request.user.id == post.author.id %}
         <a href="{% url 'blog:update-view' post.author post.title post.id %}">

@@ -1,9 +1,10 @@
 <h1>Home Page</h1>
 {% if user.is_authenticated %}
-<a href="{% url 'accounts:logout' %}">Logout</a>
+<a href="{% url 'accounts:logout' %}">Logout</a><br>
+<a href="{% url 'blog:create-post' %}">Add Post</a>
 {% else %}
 <a href="{% url 'accounts:login' %}">Login</a>
-{% endif %}<br>
+{% endif %}<br><hr>
 {% for post in posts %}
     {% if post.status == 'published' %}
         <h1><a href="{% url 'blog:detail-post' post.author post.title post.id %}">{{ post.title }}</a></h1>
