@@ -25,7 +25,7 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name="post_likes", null=True, blank=True)
     status = models.CharField(choices=STATUS, max_length=10, default='Draft')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(null=True, blank=True, upload_to='images/%Y/%m/%d/')
+    image = models.ImageField(null=True, blank=True, upload_to='images/posts/%Y/%m/%d/')
     
     def total_likes(self):
         return self.likes.count()

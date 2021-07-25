@@ -12,11 +12,13 @@
         <a href="{% url 'blog:delete-view' post.author post.title post.id %}">
             Delete
         </a>
-    {% endif %}
-    <form action="{% url 'blog:like_post' post.id %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" name="post_id" value="{{ post.id }}">Like</button> - {{ total_likes }} Likes
-    </form><hr>
+    {% endif %}<br>
+    {% if request.user not in post.likes.all %}   
+        <form action="{% url 'blog:like_post' post.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="post_id" value="{{ post.id }}">Like</button>
+        </form>
+    {% endif %}{{ total_likes }} Likes<hr>
     {% if not post.comments.all %}
         No comments yet!!!
         <a href="{% url 'blog:addcomment' post.id %}">Add Comment</a>

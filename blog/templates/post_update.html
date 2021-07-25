@@ -1,6 +1,6 @@
 {% if request.user.is_authenticated %}
     {% if request.user.id == post.author.id %}
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="update">
@@ -9,4 +9,6 @@
     {% else %}
         <strong>You are not allowed!!!</strong>
     {% endif %}
+{% else %}
+    <strong>You are not allowed!!!</strong>
 {% endif %}

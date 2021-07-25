@@ -16,7 +16,7 @@ class PostListView(generic.ListView):
     model = Post
     template_name = "home.html"
     context_object_name = "posts"
-    ordering = ['-create_post']
+    ordering = ['create_post']
     paginate_by = 5
 
 
@@ -44,7 +44,7 @@ class PostDeleteView(generic.DeleteView):
 class PostUpdateView(generic.UpdateView):
     model = Post
     template_name = 'post_update.html'
-    fields = ['title', 'body', 'status', 'category']
+    fields = ['title', 'body', 'status', 'category', 'image']
 
     def get_success_url(self):
         return reverse('blog:homepage')
